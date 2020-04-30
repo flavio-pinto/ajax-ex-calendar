@@ -34,6 +34,7 @@ $(document).ready(function () {
             case true: // quando supero dicembre 2018 ritorno a gennaio 2018
                 $('.month-list').html('');
                 printMonth(template, baseMonth);
+                printHoliday(baseMonth);
                 break;
             default:
                 $('.month-list').html('');
@@ -52,6 +53,7 @@ $(document).ready(function () {
                 prevMonth = activeMonth.add(12, 'months');
                 $('.month-list').html('');
                 printMonth(template, prevMonth);
+                printHoliday(prevMonth);
                 break;
             default:
                 $('.month-list').html('');
