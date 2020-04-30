@@ -16,3 +16,20 @@ body {
 li.holiday {
     color: red;
 }
+
+.buttons .previous {
+    margin-right: 40px;
+}
+
+.buttons button {
+    height: 50px;
+    width: 80px;
+}
+
+.buttons .previous i {
+    margin-right: 10px;
+}
+
+.buttons .next i {
+    margin-left: 10px;
+}

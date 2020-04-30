@@ -10,7 +10,7 @@ $(document).ready(function () {
     // Punto di partenza
     var baseMonth = moment('2018-01-01'); 
 
-    // Init Hndlenars
+    // Init Handlebars
     var source = $('#day-template').html();
     var template = Handlebars.compile(source);
 
@@ -19,6 +19,47 @@ $(document).ready(function () {
 
     // ottieni festività mese corrente
     printHoliday(baseMonth);
+
+    // EVENT LISTENER
+    // Buttons refs
+    var prevBtn = $('.previous');
+    var nextBtn = $('.next');
+
+    //bottone "next"
+    nextBtn.click(function() {
+        var activeMonth = moment($('h1').attr('data-this-date'));
+        var nextMonth = activeMonth.add(1, 'months');
+
+        switch (nextMonth.year() >=2019) {
+            case true: // quando supero dicembre 2018 ritorno a gennaio 2018
+                $('.month-list').html('');
+                printMonth(template, baseMonth);
+                break;
+            default:
+                $('.month-list').html('');
+                printMonth(template, nextMonth);
+                printHoliday(nextMonth);
+        }
+    });
+
+    //bottone "previous"
+    prevBtn.click(function() {
+        var activeMonth = moment($('h1').attr('data-this-date'));
+        var prevMonth = activeMonth.subtract(1, 'months');
+
+        switch (prevMonth.year() <=2017) {
+            case true: // quando supero gennaio 2018 ritorno a dicembre 2018
+                prevMonth = activeMonth.add(12, 'months');
+                $('.month-list').html('');
+                printMonth(template, prevMonth);
+                break;
+            default:
+                $('.month-list').html('');
+                printMonth(template, prevMonth);
+                printHoliday(prevMonth);
+        }
+    });
+
 
 }); // <-- End doc ready
 
