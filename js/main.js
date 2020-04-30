@@ -27,7 +27,7 @@ $(document).ready(function () {
 
     //bottone "next"
     nextBtn.click(function() {
-        var activeMonth = moment($('h1').attr('data-this-date'));
+        var activeMonth = moment($('.month').attr('data-this-date'));
         var nextMonth = activeMonth.add(1, 'months');
 
         switch (nextMonth.year() >=2019) {
@@ -45,7 +45,7 @@ $(document).ready(function () {
 
     //bottone "previous"
     prevBtn.click(function() {
-        var activeMonth = moment($('h1').attr('data-this-date'));
+        var activeMonth = moment($('.month').attr('data-this-date'));
         var prevMonth = activeMonth.subtract(1, 'months');
 
         switch (prevMonth.year() <=2017) {
@@ -76,7 +76,7 @@ function printMonth(template, date) {
     var daysInMonth = date.daysInMonth();
 
     //  setta header
-    $('h1').html( date.format('MMMM YYYY') );
+    $('.month').html( date.format('MMMM YYYY') );
 
     // Imposta data attribute data visualizzata
     $('.month').attr('data-this-date',  date.format('YYYY-MM-DD'));
@@ -93,7 +93,7 @@ function printMonth(template, date) {
         // imposta dati template
         var context = {
             class: 'day',
-            day: thisDate.format('DD MMMM'),
+            day: thisDate.format('DD'),
             completeDate: thisDate.format('YYYY-MM-DD')
         };
 
@@ -119,11 +119,11 @@ function printHoliday(date) {
             for (var i = 0; i < holidays.length; i++) {
                 var thisHoliday = holidays[i];
 
-                var listItem = $('li[data-complete-date="' + thisHoliday.date + '"]');
+                var listItem = $('.day[data-complete-date="' + thisHoliday.date + '"]');
 
                 if(listItem) {
                     listItem.addClass('holiday');
-                    listItem.text( listItem.text() + ' - ' + thisHoliday.name );
+                    listItem.html( listItem.text() + '<span class="festivity">' + thisHoliday.name + '</span>');
                 }
             }
         },
