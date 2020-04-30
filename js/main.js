@@ -81,6 +81,17 @@ function printMonth(template, date) {
     // Imposta data attribute data visualizzata
     $('.month').attr('data-this-date',  date.format('YYYY-MM-DD'));
 
+    var firstWeekDay = date.weekday();
+        for(var i = 0; i < firstWeekDay; i++) {
+            var context = {
+                class: 'day',
+                day: '',
+                completeDate: ''
+            };
+            var empty = template(context);
+            $('.month-list').append(empty);
+        }
+
     // genera giorni mese
     for (var i = 0; i < daysInMonth; i++) {
         // genera data con moment js
